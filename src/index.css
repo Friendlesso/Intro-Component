@@ -3,6 +3,8 @@
 
 :root {
   --red-400: hsl(0, 100%, 74%);
+
+  --promo-bg-color: hsl(248, 32%, 49%);
 }
 
 body {

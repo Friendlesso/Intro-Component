@@ -1,3 +1,4 @@
+import { Form } from "./components/Form/Form"
 import { Title } from "./components/Title/Title"
 
 
@@ -6,7 +7,10 @@ function App() {
 
   return (
     <>
-      <Title />
+      <main className="flex">
+        <Title />
+        <Form />
+      </main>
     </>
   )
 }
