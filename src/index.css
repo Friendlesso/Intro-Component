@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
+:root {
+  --red-400: hsl(0, 100%, 74%);
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100dvh;
   font-family: 'Poppins';
+  background: url('./assets/bg-intro-desktop.png') center/cover no-repeat var(--red-400);
 }
