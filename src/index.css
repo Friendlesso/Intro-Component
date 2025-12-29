@@ -5,6 +5,9 @@
   --red-400: hsl(0, 100%, 74%);
 
   --promo-bg-color: hsl(248, 32%, 49%);
+  --purple-300: hsl(246, 25%, 77%);
+
+  --submit-btn-color: hsl(154, 58%, 50%);
 }
 
 body {

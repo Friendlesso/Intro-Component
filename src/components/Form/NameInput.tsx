@@ -1,54 +1,74 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 
-export function NameInput() {
-  const [firstName, setFirstName] = useState("");
+type NameInputProps = {
+  validation: RegExp;
+  errorText: string;
+  label: string;
+  id: string;
+  value: string;
+  setName: Dispatch<SetStateAction<string>>;
+}
+
+export function NameInput({validation, errorText, label, id, value, setName}:NameInputProps) {
   const [error, setError] = useState("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    setFirstName(value);
+    setName(value);
 
-    if (!firstNameRegex.test(value)) {
-      setError("First name must contain letters only")
+    if (value.length > 0 && !validation.test(value)) {
+      setError(errorText)
     } else {
       setError("")
     }
   }
 
-
-
-  // \p{L} = any Unicode letter
-  // u = flag required
-  const firstNameRegex = /^[\p{L}]+$/u;
-
   return (
     <>
       <div className="relative flex flex-col">
         <input
-          id="iname"
+          id={id}
           type="text"
           required
-          value={firstName}
+          value={value}
           onChange={handleChange}
           minLength={1}
-          className="w-full py-2 bg-white border-2 border-black"
+          className=
+          {`
+            w-full 
+            py-3 px-4 
+            rounded-lg 
+            border-2 
+            outline-none
+            ${error
+              ? 'border-red-400'
+              : 'border-(--purple-300) '
+            }
+          `}
         />
         <label
-          htmlFor="iname"
+          htmlFor={id}
           className=
           {`
           absolute  left-3 top-1/2
-          transition-all px-2
-          ${firstName
-              ? '-translate-y-[140%] bg-white '
+          transition-all duration-150
+          px-2
+          rounded-2xl
+          select-none
+          ${value
+              ? '-translate-y-[175%] bg-white text-sm '
               : '-translate-y-1/2'
+            }
+            ${error
+              ? 'text-red-300'
+              : 'text-gray-500'
             }
         `}
         >
-          First Name
+          {label}
         </label>
       </div>
-      {error && <p className="text-right">{error}</p>}
+      {error && <p className="text-right text-sm text-red-400">{error}</p>}
     </>
 
   )
