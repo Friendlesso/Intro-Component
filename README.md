@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# Intro Component with Sign-Up Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A responsive layout combining introductory content with an interactive form
 
-Currently, two official plugins are available:
+This project implements an intro section paired with a sign-up form, designed to balance informational content and user interaction. The layout places a title and supporting text on the left, while the right side contains a form for collecting user details, including first name, last name, email, and password.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The form emphasizes usability and feedback, providing real-time validation, visual cues for errors, and interactive enhancements to guide the user through the sign-up process.
 
-## React Compiler
+### Screenshots
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+#### Image of the Desktop Design
 
-## Expanding the ESLint configuration
+![](./public/PageDesktop.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+#### Image of the Mobile Design
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+![](./public/PageMobile.png)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Dynamic Input Component
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The first name, last name, and email fields are implemented using a reusable input component. This approach centralizes validation logic and keeps the form scalable and maintainable.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The input component is used as follows:
+      
+      <Input
+        type={"text"}
+        validation={FIRST_NAME_REGEX}
+        label={'First Name'}
+        id={'FirstNameInput'}
+        value={firstName}
+        setValue={setFirstName}
+        minLength={1}
+      />
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This setup:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Enables consistent validation across multiple fields
+- Reduces duplication in form logic
+- Makes it easy to extend the form with additional inputs
+
+### Password Features & Validation Feedback
+
+The password field includes enhanced interaction and feedback mechanisms:
+
+- Show / Hide Password toggle for improved usability
+- Password Rules List displayed when requirements are not met
+- Live Password Strength Indicator that updates as the user types
+
+These features help users understand requirements clearly and create stronger passwords.
+
+### Built with
+
+- [React](https://react.dev/) - JS library
+- [TypeScript](https://www.typescriptlang.org/) - type superset of JS
+- [Tailwindcss](https://tailwindcss.com/) - utility-first CSS framework
+
+## Author
+
+- Website - [Mihailo Djurovic](portfolio-miahilo.vercel.app)
