@@ -1,19 +1,8 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useState } from "react";
+import type { InputProps } from "../../types/InputTypes";
 
-type validateOn = "change" | "blur";
 
-type NameInputProps = {
-  type: React.HTMLInputTypeAttribute;
-  validation: RegExp;
-  label: string;
-  id: string;
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  minLength: number;
-  validateOn?: validateOn;
-}
-
-export function Input({ type, validation, label, id, value, setValue, minLength, validateOn = "change" }: NameInputProps) {
+export function Input({ type, validation, label, id, value, setValue, minLength, validateOn = "change" }: InputProps) {
   const [error, setError] = useState("");
 
   function validate(inputVal: string) {
