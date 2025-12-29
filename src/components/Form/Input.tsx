@@ -1,25 +1,43 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
 
+type validateOn = "change" | "blur";
+
 type NameInputProps = {
+  type: React.HTMLInputTypeAttribute;
   validation: RegExp;
-  errorText: string;
   label: string;
   id: string;
   value: string;
-  setName: Dispatch<SetStateAction<string>>;
+  setValue: Dispatch<SetStateAction<string>>;
+  minLength: number;
+  validateOn?: validateOn;
 }
 
-export function NameInput({validation, errorText, label, id, value, setName}:NameInputProps) {
+export function Input({ type, validation, label, id, value, setValue, minLength, validateOn = "change" }: NameInputProps) {
   const [error, setError] = useState("");
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    setName(value);
+  function validate(inputVal: string) {
+    if(inputVal.length < minLength) return "";
+    if(!validation.test(inputVal)) {
+      return `Please provide a valid ${label}!`;
+    }
+    return "";
+  }
 
-    if (value.length > 0 && !validation.test(value)) {
-      setError(errorText)
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const InputValue = e.target.value;
+    setValue(InputValue);
+
+    if (validateOn === "change") {
+      setError(validate(InputValue));
     } else {
       setError("")
+    }
+  }
+
+  function handleBlur() {
+    if (validateOn === "blur") {
+      setError(validate(value))
     }
   }
 
@@ -28,11 +46,12 @@ export function NameInput({validation, errorText, label, id, value, setName}:Nam
       <div className="relative flex flex-col">
         <input
           id={id}
-          type="text"
+          type={type}
           required
           value={value}
           onChange={handleChange}
-          minLength={1}
+          onBlur={handleBlur}
+          minLength={minLength}
           className=
           {`
             w-full 
