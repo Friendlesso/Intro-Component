@@ -92,12 +92,7 @@ export function PasswordInput({ type, label, id, value, setValue, minLength, val
           className="absolute right-5 top-1/2 -translate-y-1/2 cursor-pointer"
           aria-label="Show Password"
           onClick={() => {
-            if (value.length === 0) {
-              setShowPassword(false)
-            } else {
-               setShowPassword(prev => !prev)
-            }
-
+            setShowPassword(prev => !prev)
           }}
         >
           <i className="fa-solid fa-eye text-lg text-gray-400 hover:text-black"></i>
