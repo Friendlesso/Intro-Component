@@ -93,9 +93,9 @@ export function PasswordInput({ type, label, id, value, setValue, minLength, val
           aria-label="Show Password"
           onClick={() => {
             if (value.length === 0) {
-              setShowPassword(prev => !prev)
+              setShowPassword(false)
             } else {
-              return null
+               setShowPassword(prev => !prev)
             }
 
           }}
